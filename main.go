@@ -4,6 +4,7 @@ import (
 	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo"
 	"github.com/EngoEngine/engo/common"
+	"log"
 )
 
 type menuScene struct {}
@@ -20,10 +21,10 @@ func (*menuScene) Preload() {
 	engo.Files.Load("assets/missingtex.jpg")
 }
 
-func (*menuScene) Setup(engo.Updater) {
+func (*menuScene) Setup(u engo.Updater) {
 	// Setup Scene
 	world, _ := u.(*ecs.World)
-	world.AddSystem(&common.RenderSystem)
+	world.AddSystem(&common.RenderSystem{})
 	// Setup Samus
 	sammy := Samus{BasicEntity: ecs.NewBasic()}
 	sammy.SpaceComponent = common.SpaceComponent{
@@ -37,12 +38,13 @@ func (*menuScene) Setup(engo.Updater) {
 	}
 	sammy.RenderComponent = common.RenderComponent{
 		Drawable: tex,
-		Scale: engo.Point{1, 1}
+		Scale: engo.Point{1, 1},
 	}
 	for _, system := range world.Systems(){
-		switch sys := system.(type)
-		case *common.RenderSystems:
-			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.RenderComponent)
+		switch sys := system.(type){
+		case *common.RenderSystem:
+			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
+		}
 	}
 }
 
