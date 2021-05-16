@@ -17,7 +17,7 @@ type Samus struct {
 func (*menuScene) Type() string { return "menuScene" }
 
 func (*menuScene) Preload() {
-	engo.Files.Load("assets/placeholder.jpg")
+	engo.Files.Load("assets/missingtex.jpg")
 }
 
 func (*menuScene) Setup(engo.Updater) {
@@ -31,7 +31,7 @@ func (*menuScene) Setup(engo.Updater) {
 		Width: 1024,
 		Height: 576,
 	}
-	tex, err := common.LoadedSprite("assets/placeholder.jpg")
+	tex, err := common.LoadedSprite("assets/missingtex.jpg")
 	if err !=  nil {
 		log.Println("[FATAL] Can't load sprite for Samus! Error: " + err.Error())
 	}
