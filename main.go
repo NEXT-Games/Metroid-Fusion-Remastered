@@ -32,7 +32,7 @@ func (*menuScene) Setup(u engo.Updater) {
 		Width: 1024,
 		Height: 576,
 	}
-	tex, err := common.LoadedSprite("assets/missingtex.jpg")
+	tex, err := common.LoadedSprite("tex/missingtex.jpg")
 	if err !=  nil {
 		log.Println("[FATAL] Can't load sprite for Samus! Error: " + err.Error())
 	}
