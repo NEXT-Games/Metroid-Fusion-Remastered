@@ -18,7 +18,7 @@ type Samus struct {
 func (*menuScene) Type() string { return "menuScene" }
 
 func (*menuScene) Preload() {
-	engo.Files.Load("assets/missingtex.jpg")
+	engo.Files.Load("tex/missingtex.jpg")
 }
 
 func (*menuScene) Setup(u engo.Updater) {
