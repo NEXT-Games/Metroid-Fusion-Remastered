@@ -25,8 +25,8 @@ func (*menuScene) Setup(engo.Updater) {
 	world, _ := u.(*ecs.World)
 	world.AddSystem(&common.RenderSystem)
 	// Setup Samus
-	sammy := Samus(BasicEntity: ecs.NewBasic())
-	sammy.SpaceComponent = common.SpaceComponent {
+	sammy := Samus{BasicEntity: ecs.NewBasic()}
+	sammy.SpaceComponent = common.SpaceComponent{
 		Position: engo.Point{0, 0},
 		Width: 1024,
 		Height: 576,
@@ -37,7 +37,7 @@ func (*menuScene) Setup(engo.Updater) {
 	}
 	sammy.RenderComponent = common.RenderComponent{
 		Drawable: tex,
-		Scale: engo.point{1, 1}
+		Scale: engo.Point{1, 1}
 	}
 	for _, system := range world.Systems(){
 		switch sys := system.(type)
