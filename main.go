@@ -52,7 +52,7 @@ func (*menuScene) Setup(u engo.Updater) {
 }
 
 type movingThingSystem struct {
-	added
+	added common.SpaceComponent
 }
 
 func (*movingThingSystem) Type() string { return "movingThingSystem" }
