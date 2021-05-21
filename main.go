@@ -46,6 +46,7 @@ func (*menuScene) Setup(u engo.Updater) {
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		}
 	}
+	sammy.SpaceComponent.setPosition(engo.Point{2, 2})
 }
 
 func main() {
