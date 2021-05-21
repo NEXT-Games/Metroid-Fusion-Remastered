@@ -28,7 +28,7 @@ func (*menuScene) Setup(u engo.Updater) {
 	world.AddSystem(&movingThingSystem{})
 	// Setup Samus
 	sammy := Samus{BasicEntity: ecs.NewBasic()}
-	sammy.SpaceComponent := common.SpaceComponent{
+	sammy.SpaceComponent = common.SpaceComponent{
 		Position: engo.Point{0, 0},
 		Width: 1024,
 		Height: 576,
@@ -37,21 +37,23 @@ func (*menuScene) Setup(u engo.Updater) {
 	if err !=  nil {
 		log.Println("[FATAL] Can't load sprite for Samus! Error: " + err.Error())
 	}
-	sammy.RenderComponent := common.RenderComponent{
+	sammy.RenderComponent = common.RenderComponent{
 		Drawable: tex,
 		Scale: engo.Point{1, 1},
 	}
 	for _, system := range world.Systems(){
 		switch sys := system.(type){
 		case *common.RenderSystem:
-			sys.Add(&menuScene.sammy.BasicEntity, &menuScene.sammy.RenderComponent, &menuScene.sammy.SpaceComponent)
+			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, sammy.SpaceComponent)
 		case *movingThingSystem:
 			sys.Add(&menuScene.sammy.SpaceComponent)
 		}
 	}
 }
 
-type movingThingSystem struct {}
+type movingThingSystem struct {
+	added
+}
 
 func (*movingThingSystem) Type() string { return "movingThingSystem" }
 
@@ -60,9 +62,12 @@ func (self *movingThingSystem) Update(dt float32) {
 }
 
 func (self *movingThingSystem) Add(added common.SpaceComponent) {
-	self.added := added
+	self.added = added
 }
 
+func (self *movingThingSystem) Remove(added common.SpaceComponent) {
+	self.added = self.added 
+}
 
 func main() {
 	opts := engo.RunOptions{
