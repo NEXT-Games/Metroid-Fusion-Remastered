@@ -62,7 +62,7 @@ func (self *movingThingSystem) Update(dt float32) {
 	self.spaceComponent.Position = engo.Point{100, 100}
 }
 
-func (self *movingThingSystem) Add(basicEntity ecs.BasicEntity, renderComponent common.RenderComponent, spaceComponent common.SpaceComponent) {
+func (self *movingThingSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
 	self.spaceComponent = spaceComponent
 }
 
