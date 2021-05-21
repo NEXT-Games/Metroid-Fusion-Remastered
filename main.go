@@ -46,7 +46,7 @@ func (*menuScene) Setup(u engo.Updater) {
 		case *common.RenderSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, sammy.SpaceComponent)
 		case *movingThingSystem:
-			sys.Add(&sammy.SpaceComponent)
+			sys.Add(sammy)
 		}
 	}
 }
