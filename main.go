@@ -44,15 +44,16 @@ func (*menuScene) Setup(u engo.Updater) {
 	for _, system := range world.Systems(){
 		switch sys := system.(type){
 		case *common.RenderSystem:
-			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, sammy.SpaceComponent)
+			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		case *movingThingSystem:
-			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, sammy.SpaceComponent)
+			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		}
 	}
 }
 
 type movingThingSystem struct {
 	added Samus
+	spaceComponent common.SpaceComponent
 }
 
 func (*movingThingSystem) Type() string { return "movingThingSystem" }
