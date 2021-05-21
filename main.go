@@ -46,7 +46,7 @@ func (*menuScene) Setup(u engo.Updater) {
 		case *common.RenderSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, sammy.SpaceComponent)
 		case *movingThingSystem:
-			sys.Add(sammy)
+			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, sammy.SpaceComponent)
 		}
 	}
 }
@@ -58,11 +58,11 @@ type movingThingSystem struct {
 func (*movingThingSystem) Type() string { return "movingThingSystem" }
 
 func (self *movingThingSystem) Update(dt float32) {
-	self.added.SpaceComponent.Position = engo.Point{100, 100}
+	self.spaceComponent.Position = engo.Point{100, 100}
 }
 
-func (self *movingThingSystem) Add(added Samus) {
-	self.added = added
+func (self *movingThingSystem) Add(basicEntity ecs.BasicEntity, renderComponent common.RenderComponent, spaceComponent common.spaceComponent) {
+	self.spaceComponent = spaceComponent
 }
 
 func (self *movingThingSystem) Remove(added ecs.BasicEntity) {
