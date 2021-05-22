@@ -24,6 +24,7 @@ func (*menuScene) Preload() {
 func (*menuScene) Setup(u engo.Updater) {
 	// Setup Scene
 	world, _ := u.(*ecs.World)
+	engo.Input.RegisterButton("MoveLeft", engo.KeyA)
 	world.AddSystem(&common.RenderSystem{})
 	world.AddSystem(&movingThingSystem{})
 	// Setup Samus
@@ -49,6 +50,7 @@ func (*menuScene) Setup(u engo.Updater) {
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		}
 	}
+	log.Println("Designed with ❤️ by NEXT Games")
 }
 
 type movingThingSystem struct {
@@ -59,7 +61,11 @@ type movingThingSystem struct {
 func (*movingThingSystem) Type() string { return "movingThingSystem" }
 
 func (self *movingThingSystem) Update(dt float32) {
-	self.spaceComponent.Position = engo.Point{100, 100}
+	// self.spaceComponent.Position = engo.Point{100, 100}
+	// A friendly reminder that **we do NOT do a little trolling**
+	if engo.Input.Button("MoveLeft").JustPressed() {
+		self.spaceComponent.Position.X = self.spaceComponent.Position.X + 1
+	}
 }
 
 func (self *movingThingSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
