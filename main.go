@@ -25,6 +25,7 @@ func (*menuScene) Setup(u engo.Updater) {
 	// Setup Scene
 	world, _ := u.(*ecs.World)
 	engo.Input.RegisterButton("MoveLeft", engo.KeyA)
+	engo.Input.RegisterButton("MoveRight", engo.KeyD)
 	world.AddSystem(&common.RenderSystem{})
 	world.AddSystem(&movingThingSystem{})
 	// Setup Samus
@@ -65,6 +66,9 @@ func (self *movingThingSystem) Update(dt float32) {
 	// A friendly reminder that **we do NOT do a little trolling**
 	if engo.Input.Button("MoveLeft").Down() {
 		self.spaceComponent.Position.X = self.spaceComponent.Position.X - 3
+	}
+	if engo.Input.Button("MoveRight").Down() {
+		self.spaceComponent.Position.X = self.spaceComponent.Position.X + 3
 	}
 }
 
