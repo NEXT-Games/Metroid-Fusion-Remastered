@@ -74,13 +74,13 @@ func (self *movingThingSystem) Update(dt float32) {
 		self.spaceComponent.Position.X += 3
 	}
 	if engo.Input.Button("Jump").Down() && !self.isJumping && self.totalJump <= 100 {
-		self.spaceComponent.Position.Y -= 10
-		self.totalJump += 10
+		self.spaceComponent.Position.Y -= 7
+		self.totalJump += 7
 		self.isJumping = true
 	}
 	if self.isJumping && self.totalJump <= 100 {
-		self.spaceComponent.Position.Y -= 10
-		self.totalJump += 10
+		self.spaceComponent.Position.Y -= 7
+		self.totalJump += 7
 	}
 	if self.isJumping && self.totalJump >= 100 {
 		self.totalJump = 0
