@@ -63,8 +63,8 @@ func (*movingThingSystem) Type() string { return "movingThingSystem" }
 func (self *movingThingSystem) Update(dt float32) {
 	// self.spaceComponent.Position = engo.Point{100, 100}
 	// A friendly reminder that **we do NOT do a little trolling**
-	if engo.Input.Button("MoveLeft").JustPressed() {
-		self.spaceComponent.Position.X = self.spaceComponent.Position.X + 1
+	if engo.Input.Button("MoveLeft").Down() {
+		self.spaceComponent.Position.X = self.spaceComponent.Position.X - 3
 	}
 }
 
