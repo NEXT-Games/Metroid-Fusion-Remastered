@@ -54,6 +54,7 @@ func (*menuScene) Setup(u engo.Updater) {
 		}
 	}
 	log.Println("Designed with ❤️ by NEXT Games")
+	log.Println("If you have paid for this software you have been scammed")
 }
 
 type movingThingSystem struct {
@@ -78,16 +79,16 @@ func (self *movingThingSystem) Update(dt float32) {
 		self.totalJump += 20
 		self.isJumping = true
 	}
-	if self.isJumping && self.totalJump <= 100 {
+	if self.isJumping && self.totalJump <= 100 && self.totalJump >= -1 {
 		self.spaceComponent.Position.Y -= 20
 		self.totalJump += 20
 	}
 	if self.isJumping && self.totalJump >= 100 {
-		self.totalJump = 0
-		self.isJumping = false
+		self.totalJump = -1
 	}
-	if self.totalJump < 0 {
-		// todo
+	if self.totalJump <= -1 && self.totalJump >= -100 {
+		self.totalJump -= 1
+		self.spaceComponent.Position.Y += 1
 	}
 }
 
