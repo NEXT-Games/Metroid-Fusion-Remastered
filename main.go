@@ -87,8 +87,8 @@ func (self *movingThingSystem) Update(dt float32) {
 		self.totalJump = -1
 	}
 	if self.totalJump <= -1 && self.totalJump >= -100 {
-		self.totalJump -= 1
-		self.spaceComponent.Position.Y += 1
+		self.totalJump -= 20
+		self.spaceComponent.Position.Y += 20
 	}
 }
 
