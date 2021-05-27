@@ -1,0 +1,12 @@
+<game>
+  <name>METROID Fusion: Remastered</name>
+  <internalname>mfr</internalname>
+  <icon>none</icon>
+  <downloadform>github</downloadform>
+  <latest>v0.1-alpha</latest>
+</game>
+<release>
+  <version>v0.1-alpha</version>
+  <name>v0.1 Alpha</name>
+</release>
+
