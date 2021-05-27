@@ -8,7 +8,7 @@ import (
 	"github.com/EngoEngine/engo/common"
 )
 
-type menuScene struct{}
+type MainDeckScene struct{}
 
 type Samus struct {
 	ecs.BasicEntity
@@ -16,13 +16,13 @@ type Samus struct {
 	common.SpaceComponent
 }
 
-func (*menuScene) Type() string { return "menuScene" }
+func (*MainDeckScene) Type() string { return "MainDeckScene" }
 
-func (*menuScene) Preload() {
+func (*MainDeckScene) Preload() {
 	engo.Files.Load("tex/missingtex.jpg")
 }
 
-func (*menuScene) Setup(u engo.Updater) {
+func (*MainDeckScene) Setup(u engo.Updater) {
 	// Setup Scene
 	world, _ := u.(*ecs.World)
 	engo.Input.RegisterButton("MoveLeft", engo.KeyA)
@@ -112,5 +112,5 @@ func main() {
 		Width:  1920,
 		Height: 1080,
 	}
-	engo.Run(opts, &menuScene{})
+	engo.Run(opts, &MainDeckScene{})
 }
