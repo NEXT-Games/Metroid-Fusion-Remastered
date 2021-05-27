@@ -29,7 +29,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 	engo.Input.RegisterButton("MoveRight", engo.KeyD)
 	engo.Input.RegisterButton("Jump", engo.KeySpace)
 	world.AddSystem(&common.RenderSystem{})
-	world.AddSystem(&movingThingSystem{})
+	world.AddSystem(&movementSystem{})
 	// Setup Samus
 	sammy := Samus{BasicEntity: ecs.NewBasic()}
 	sammy.SpaceComponent = common.SpaceComponent{
@@ -49,7 +49,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		switch sys := system.(type) {
 		case *common.RenderSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
-		case *movingThingSystem:
+		case *movementSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		}
 	}
@@ -57,15 +57,15 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 	log.Println("If you have paid for this software you have been scammed")
 }
 
-type movingThingSystem struct {
+type movementSystem struct {
 	spaceComponent *common.SpaceComponent
 	totalJump      int
 	isJumping      bool
 }
 
-func (*movingThingSystem) Type() string { return "movingThingSystem" }
+func (*movementSystem) Type() string { return "movementSystem" }
 
-func (self *movingThingSystem) Update(dt float32) {
+func (self *movementSystem) Update(dt float32) {
 	// self.spaceComponent.Position = engo.Point{100, 100}
 	// A friendly reminder that **we do NOT do a little trolling**
 	if engo.Input.Button("MoveLeft").Down() {
@@ -96,13 +96,13 @@ func (self *movingThingSystem) Update(dt float32) {
 	}
 }
 
-func (self *movingThingSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
+func (self *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
 	self.spaceComponent = spaceComponent
 	self.isJumping = false
 	self.totalJump = 0
 }
 
-func (self *movingThingSystem) Remove(added ecs.BasicEntity) {
+func (self *movementSystem) Remove(added ecs.BasicEntity) {
 	// nop
 }
 
