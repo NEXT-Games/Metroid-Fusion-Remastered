@@ -1,8 +1,6 @@
 package main
 
 import (
-	"container/list"
-
 	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo"
 	"github.com/EngoEngine/engo/common"
@@ -55,28 +53,4 @@ func (self *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *c
 
 func (self *movementSystem) Remove(added ecs.BasicEntity) {
 	// nop
-}
-
-type baseObject struct {
-	objectMeta      string // Object type
-	spaceComponent  common.SpaceComponent
-	renderComponent common.RenderComponent
-}
-
-type physicsSystem struct {
-	objects list.List
-}
-
-func (self *physicsSystem) Setup() {
-	self.objects.Init()
-}
-
-func (self *physicsSystem) Add(object baseObject) {
-	self.objects.PushBack(object)
-}
-
-func (self *physicsSystem) Update(dt float32) {
-	for object := self.objects.Front(); object != nil; object = object.Next() {
-		// todo
-	}
 }
