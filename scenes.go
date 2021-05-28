@@ -34,6 +34,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 	world.AddSystem(&common.RenderSystem{})
 	world.AddSystem(&movementSystem{})
 	world.AddSystem(&engoBox2dSystem.PhysicsSystem{VelocityIterations: 3, PositionIterations: 8})
+	world.AddSystem(&engoBox2dSystem.CollisionSystem{})
 
 	engoBox2dSystem.World.SetGravity(box2d.B2Vec2{X: 0, Y: 10})
 	// Setup Samus
@@ -73,6 +74,8 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		case *movementSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		case *engoBox2dSystem.PhysicsSystem:
+			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
+		case *engoBox2dSystem.CollisionSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
 		}
 	}
