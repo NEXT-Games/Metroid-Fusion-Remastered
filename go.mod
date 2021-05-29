@@ -1,4 +1,4 @@
-module github.com/zurgeg/fusion
+module github.com/NEXT-Games/Metroid-Fusion-Remastered
 
 go 1.16
 

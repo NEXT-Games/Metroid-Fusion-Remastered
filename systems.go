@@ -32,6 +32,9 @@ func (self *movementSystem) Update(dt float32) {
 		self.spaceComponent.Position.Y -= 20
 		self.totalJump += 20
 	}
+	if self.isJumping && self.totalJump >= 100 {
+		self.isJumping = false
+	}
 }
 
 func (self *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
