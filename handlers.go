@@ -1,24 +1,9 @@
 package main
 
 import (
-	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo"
 	"github.com/Noofbiz/engoBox2dSystem"
 )
-
-type entityType struct {
-	ecs.BasicEntity
-	*engoBox2dSystem.Box2dComponent
-	entity BaseEntity
-}
-
-type entityHolder struct {
-	entities []*entityType
-}
-
-func (holder *entityHolder) Add(e *entityType) {
-	holder.entities = append(holder.entities, e)
-}
 
 func addListeners(s *entityHolder) {
 	engo.Mailbox.Listen("CollisionStartMessage", func(message engo.Message) {
