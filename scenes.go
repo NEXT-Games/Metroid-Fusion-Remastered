@@ -12,15 +12,6 @@ import (
 
 type MainDeckScene struct{}
 
-type Samus struct {
-	ecs.BasicEntity
-	common.RenderComponent
-	common.SpaceComponent
-	engoBox2dSystem.Box2dComponent
-	isJumping  bool
-	spriteMeta string "samus"
-}
-
 func (*MainDeckScene) Type() string { return "MainDeckScene" }
 
 func (*MainDeckScene) Preload() {
@@ -40,7 +31,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 
 	engoBox2dSystem.World.SetGravity(box2d.B2Vec2{X: 0, Y: 10})
 	// Setup Samus
-	sammy := Samus{BasicEntity: ecs.NewBasic()}
+	sammy := BaseEntity{BasicEntity: ecs.NewBasic(), spriteMeta: "samus"}
 	sammy.SpaceComponent = common.SpaceComponent{
 		Position: engo.Point{0, 0},
 		Width:    1024,
@@ -82,6 +73,8 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
 		}
 	}
+	entityholder := entityHolder{}
+	entityholder.Add(&entityType{sammy.BasicEntity, &sammy.Box2dComponent, sammy})
 	log.Println("Designed with ❤️ by NEXT Games")
 	log.Println("If you have paid for this software you have been scammed")
 }

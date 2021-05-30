@@ -9,7 +9,7 @@ import (
 type movementSystem struct {
 	spaceComponent *common.SpaceComponent
 	totalJump      int
-	samus          *Samus
+	samus          *BaseEntity
 }
 
 func (*movementSystem) Type() string { return "movementSystem" }
@@ -33,7 +33,7 @@ func (movementSystem *movementSystem) Update(dt float32) {
 		movementSystem.totalJump += 20
 	}
 }
-func (movementSystem *movementSystem) AddEtc(samus *Samus) {
+func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
 	movementSystem.samus = samus
 }
 func (movementSystem *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {

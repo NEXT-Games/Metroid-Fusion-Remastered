@@ -2,12 +2,17 @@ package main
 
 import (
 	"github.com/EngoEngine/ecs"
+	"github.com/EngoEngine/engo/common"
 	"github.com/Noofbiz/engoBox2dSystem"
 )
 
 type BaseEntity struct {
-	objMeta   string "none"
-	isJumping bool
+	ecs.BasicEntity
+	common.RenderComponent
+	common.SpaceComponent
+	engoBox2dSystem.Box2dComponent
+	isJumping  bool
+	spriteMeta string
 }
 type entityType struct {
 	ecs.BasicEntity
