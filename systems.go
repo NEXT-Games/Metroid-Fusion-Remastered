@@ -9,7 +9,7 @@ import (
 type movementSystem struct {
 	spaceComponent *common.SpaceComponent
 	totalJump      int
-	isJumping      bool
+	samus          *Samus
 }
 
 func (*movementSystem) Type() string { return "movementSystem" }
@@ -23,20 +23,21 @@ func (movementSystem *movementSystem) Update(dt float32) {
 	if engo.Input.Button("MoveRight").Down() {
 		movementSystem.spaceComponent.Position.X += 3
 	}
-	if engo.Input.Button("Jump").Down() && !movementSystem.isJumping && movementSystem.totalJump <= 100 {
+	if engo.Input.Button("Jump").Down() && !movementSystem.samus.isJumping && movementSystem.totalJump <= 100 {
 		movementSystem.spaceComponent.Position.Y -= 20
 		movementSystem.totalJump += 20
-		movementSystem.isJumping = true
+		movementSystem.samus.isJumping = true
 	}
-	if movementSystem.isJumping && movementSystem.totalJump <= 100 && movementSystem.totalJump >= -1 {
+	if movementSystem.samus.isJumping && movementSystem.totalJump <= 100 && movementSystem.totalJump >= -1 {
 		movementSystem.spaceComponent.Position.Y -= 20
 		movementSystem.totalJump += 20
 	}
 }
-
+func (movementSystem *movementSystem) AddEtc(samus *Samus) {
+	movementSystem.samus = samus
+}
 func (movementSystem *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
 	movementSystem.spaceComponent = spaceComponent
-	movementSystem.isJumping = false
 	movementSystem.totalJump = 0
 }
 

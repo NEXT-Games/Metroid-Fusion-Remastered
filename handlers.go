@@ -9,6 +9,7 @@ import (
 type entityType struct {
 	ecs.BasicEntity
 	*engoBox2dSystem.Box2dComponent
+	entity BaseEntity
 }
 
 type entityHolder struct {
@@ -33,7 +34,11 @@ func addListeners(s *entityHolder) {
 								continue
 							}
 							if e2.BasicEntity.ID() == a || e2.BasicEntity.ID() == b {
-								continue // nop
+								// This means samus has hit the floor and is no longer jumping.
+								// Stop the jump
+								if e1.entity.objMeta == "samus" {
+									e1.entity.isJumping = false
+								}
 							}
 						}
 					}

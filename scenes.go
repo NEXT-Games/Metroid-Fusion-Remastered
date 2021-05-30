@@ -17,6 +17,8 @@ type Samus struct {
 	common.RenderComponent
 	common.SpaceComponent
 	engoBox2dSystem.Box2dComponent
+	isJumping  bool
+	spriteMeta string "samus"
 }
 
 func (*MainDeckScene) Type() string { return "MainDeckScene" }
