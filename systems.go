@@ -32,9 +32,6 @@ func (movementSystem *movementSystem) Update(dt float32) {
 		movementSystem.spaceComponent.Position.Y -= 20
 		movementSystem.totalJump += 20
 	}
-	if movementSystem.isJumping && movementSystem.totalJump >= 100 {
-		movementSystem.isJumping = false
-	}
 }
 
 func (movementSystem *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
