@@ -75,6 +75,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 		case *movementSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
+			sys.AddEtc(&sammy)
 		case *engoBox2dSystem.PhysicsSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
 		case *engoBox2dSystem.CollisionSystem:
