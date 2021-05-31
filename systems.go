@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/ByteArena/box2d"
 	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo"
@@ -28,6 +30,7 @@ func (movementSystem *movementSystem) Update(dt float32) {
 		movementSystem.samus.totalJump += 10
 	}
 	if movementSystem.samus.totalJump >= 100 {
+		log.Println("*unjumps your samus*")
 		movementSystem.samus.canJump = false
 	}
 }
