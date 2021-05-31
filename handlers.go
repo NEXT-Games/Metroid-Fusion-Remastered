@@ -24,6 +24,9 @@ func addListeners(s *entityHolder) {
 								if e1.entity.spriteMeta == "samus" {
 									e1.entity.isJumping = false
 								}
+								if e2.entity.spriteMeta == "samus" {
+									e2.entity.isJumping = false
+								}
 							}
 						}
 					}
