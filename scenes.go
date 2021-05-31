@@ -96,6 +96,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		case *engoBox2dSystem.CollisionSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
+			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		}
 	}
 	entityholder := entityHolder{}
