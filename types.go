@@ -11,9 +11,9 @@ type BaseEntity struct {
 	common.RenderComponent
 	common.SpaceComponent
 	engoBox2dSystem.Box2dComponent
-	isJumping  bool
 	spriteMeta string
 	totalJump  int
+	canJump    bool
 }
 type entityType struct {
 	ecs.BasicEntity
