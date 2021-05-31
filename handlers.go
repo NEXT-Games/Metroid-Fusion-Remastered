@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/EngoEngine/engo"
 	"github.com/Noofbiz/engoBox2dSystem"
 )
@@ -22,10 +24,12 @@ func addListeners(s *entityHolder) {
 								// This means samus has hit the floor and is no longer jumping.
 								// Stop the jump
 								if e1.entity.spriteMeta == "samus" && e1.entity.isJumping && e1.entity.totalJump > 0 {
+									log.Println("e1")
 									e1.entity.isJumping = false
 									e1.entity.totalJump = 0
 								}
 								if e2.entity.spriteMeta == "samus" && e2.entity.isJumping && e2.entity.totalJump > 0 {
+									log.Println("e2")
 									e2.entity.isJumping = false
 									e2.entity.totalJump = 0
 								}
