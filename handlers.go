@@ -9,6 +9,7 @@ import (
 
 func addListeners(s *entityHolder) {
 	engo.Mailbox.Listen("CollisionStartMessage", func(message engo.Message) {
+		log.Printf("collision")
 		c, isCollision := message.(engoBox2dSystem.CollisionStartMessage)
 		if isCollision {
 			a := c.Contact.GetFixtureA().GetBody().GetUserData()

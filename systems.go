@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"github.com/ByteArena/box2d"
 	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo"
@@ -25,12 +23,8 @@ func (movementSystem *movementSystem) Update(dt float32) {
 	if engo.Input.Button("MoveRight").Down() {
 		movementSystem.spaceComponent.Position.X += 3
 	}
-	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump <= 100 {
+	if engo.Input.Button("Jump").Down() {
 		movementSystem.samus.Body.ApplyLinearImpulseToCenter(box2d.B2Vec2{X: 0, Y: -1000}, true)
-		movementSystem.samus.totalJump += 25
-	}
-	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump >= 100 {
-		log.Println("bruh")
 	}
 }
 func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
