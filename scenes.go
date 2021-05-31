@@ -59,22 +59,54 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		Friction: 0.1,
 	}
 	sammy.Box2dComponent.Body.CreateFixtureFromDef(&sammyFixtureDef)
+	testGround := BaseEntity{BasicEntity: ecs.NewBasic(), spriteMeta: "samus"}
+	sammy.SpaceComponent = common.SpaceComponent{
+		Position: engo.Point{0, -100},
+		Width:    1024,
+		Height:   576,
+	}
+	tex, err = common.LoadedSprite("tex/missingtex.jpg")
+	if err != nil {
+		log.Println("[FATAL] Can't load sprite for Samus! Error: " + err.Error())
+	}
+	testGround.RenderComponent = common.RenderComponent{
+		Drawable: tex,
+		Scale:    engo.Point{1, 1},
+	}
+	tgDef := box2d.NewB2BodyDef()
+	tgDef.Type = box2d.B2BodyType.B2_dynamicBody
+	tgDef.Position = engoBox2dSystem.Conv.ToBox2d2Vec(sammy.Center())
+	tgDef.Angle = engoBox2dSystem.Conv.DegToRad(sammy.Rotation)
+	testGround.Box2dComponent.Body = engoBox2dSystem.World.CreateBody(sammyDef)
+	var tgShape box2d.B2PolygonShape
+
+	tgShape.SetAsBox(engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Width/2), engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Height/2))
+	tgFixtureDef := box2d.B2FixtureDef{
+		Shape:    &tgShape,
+		Density:  1.0,
+		Friction: 0.1,
+	}
+	testGround.Box2dComponent.Body.CreateFixtureFromDef(&tgFixtureDef)
 
 	for _, system := range world.Systems() {
 		switch sys := system.(type) {
 		case *common.RenderSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
+			sys.Add(&testGround.BasicEntity, &testGround.RenderComponent, &testGround.SpaceComponent)
 		case *movementSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
 			sys.AddEtc(&sammy)
 		case *engoBox2dSystem.PhysicsSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
+			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		case *engoBox2dSystem.CollisionSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
+			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		}
 	}
 	entityholder := entityHolder{}
 	entityholder.Add(&entityType{sammy.BasicEntity, &sammy.Box2dComponent, sammy})
+	entityholder.Add(&entityType{testGround.BasicEntity, &testGround.Box2dComponent, testGround})
 	log.Println("Designed with ❤️ by NEXT Games")
 	log.Println("If you have paid for this software you have been scammed")
 }
