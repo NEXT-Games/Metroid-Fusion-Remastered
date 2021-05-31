@@ -102,6 +102,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 	entityholder := entityHolder{}
 	entityholder.Add(&entityType{sammy.BasicEntity, &sammy.Box2dComponent, sammy})
 	entityholder.Add(&entityType{testGround.BasicEntity, &testGround.Box2dComponent, testGround})
+	addListeners(&entityholder)
 	log.Println("Designed with ❤️ by NEXT Games")
 	log.Println("If you have paid for this software you have been scammed")
 }
