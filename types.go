@@ -13,6 +13,7 @@ type BaseEntity struct {
 	engoBox2dSystem.Box2dComponent
 	isJumping  bool
 	spriteMeta string
+	totalJump  int
 }
 type entityType struct {
 	ecs.BasicEntity
