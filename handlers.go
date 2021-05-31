@@ -21,7 +21,7 @@ func addListeners(s *entityHolder) {
 							if e2.BasicEntity.ID() == a || e2.BasicEntity.ID() == b {
 								// This means samus has hit the floor and is no longer jumping.
 								// Stop the jump
-								if e1.entity.spriteMeta == "samus" && e1.entity.isJumping && e2.entity.totalJump != 0 {
+								if e1.entity.spriteMeta == "samus" && e1.entity.isJumping && e1.entity.totalJump != 0 {
 									e1.entity.isJumping = false
 									e1.entity.totalJump = 0
 								}
