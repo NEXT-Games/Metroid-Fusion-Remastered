@@ -25,12 +25,10 @@ func addListeners(s *entityHolder) {
 								// Stop the jump
 								if e1.entity.spriteMeta == "samus" {
 									log.Println("e1")
-									e1.entity.isJumping = false
 									e1.entity.totalJump = 0
 								}
 								if e2.entity.spriteMeta == "samus" {
 									log.Println("e2")
-									e2.entity.isJumping = false
 									e2.entity.totalJump = 0
 								}
 							}

@@ -23,10 +23,9 @@ func (movementSystem *movementSystem) Update(dt float32) {
 	if engo.Input.Button("MoveRight").Down() {
 		movementSystem.spaceComponent.Position.X += 3
 	}
-	if engo.Input.Button("Jump").Down() && !movementSystem.samus.isJumping && movementSystem.samus.totalJump <= 100 {
+	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump <= 100 {
 		movementSystem.samus.Body.ApplyLinearImpulseToCenter(box2d.B2Vec2{X: 0, Y: -1000}, true)
-		movementSystem.samus.isJumping = true
-		movementSystem.samus.totalJump = 0
+		movementSystem.samus.totalJump += 25
 	}
 }
 func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
