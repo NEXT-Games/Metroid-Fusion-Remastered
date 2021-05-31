@@ -8,7 +8,6 @@ import (
 
 type movementSystem struct {
 	spaceComponent *common.SpaceComponent
-	totalJump      int
 	samus          *BaseEntity
 }
 
@@ -25,7 +24,7 @@ func (movementSystem *movementSystem) Update(dt float32) {
 	}
 	if engo.Input.Button("Jump").Down() && !movementSystem.samus.isJumping {
 		movementSystem.spaceComponent.Position.Y -= 20
-		movementSystem.totalJump += 20
+		movementSystem.samus.totalJump += 20
 		movementSystem.samus.isJumping = true
 	}
 	if movementSystem.samus.isJumping && movementSystem.samus.totalJump <= 100 && movementSystem.samus.totalJump >= -1 {
