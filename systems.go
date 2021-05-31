@@ -38,7 +38,6 @@ func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
 }
 func (movementSystem *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
 	movementSystem.spaceComponent = spaceComponent
-	movementSystem.totalJump = 0
 }
 
 func (movementSystem *movementSystem) Remove(added ecs.BasicEntity) {
