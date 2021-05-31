@@ -29,7 +29,7 @@ func addListeners(s *entityHolder) {
 								// This means samus has hit the floor and is no longer jumping.
 								// Stop the jump
 								log.Println("e1 and e2 obtained")
-								if e1.entity.spriteMeta == "samus" && e2.entity.spriteMeta == "grouns" || e2.entity.spriteMeta == "samus" && e1.entity.spriteMeta == "ground" {
+								if e1.entity.spriteMeta == "samus" && e2.entity.spriteMeta == "ground" || e2.entity.spriteMeta == "samus" && e1.entity.spriteMeta == "ground" {
 									e1.entity.canJump = true
 									e2.entity.canJump = true
 								}

@@ -33,6 +33,7 @@ func (movementSystem *movementSystem) Update(dt float32) {
 }
 func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
 	movementSystem.samus = samus
+	movementSystem.samus.canJump = true
 }
 func (movementSystem *movementSystem) Add(basicEntity *ecs.BasicEntity, renderComponent *common.RenderComponent, spaceComponent *common.SpaceComponent) {
 	movementSystem.spaceComponent = spaceComponent
