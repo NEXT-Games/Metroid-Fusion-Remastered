@@ -30,8 +30,11 @@ func addListeners(s *entityHolder) {
 								// Stop the jump
 								log.Println("e1 and e2 obtained")
 								if e1.entity.spriteMeta == "samus" && e2.entity.spriteMeta == "ground" || e2.entity.spriteMeta == "samus" && e1.entity.spriteMeta == "ground" {
+									log.Println("jumpity jump")
 									e1.entity.canJump = true
 									e2.entity.canJump = true
+									e1.entity.totalJump = 0
+									e2.entity.totalJump = 0
 								}
 							}
 						}
