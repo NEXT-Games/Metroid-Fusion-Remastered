@@ -59,7 +59,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		Friction: 0.1,
 	}
 	sammy.Box2dComponent.Body.CreateFixtureFromDef(&sammyFixtureDef)
-	testGround := BaseEntity{BasicEntity: ecs.NewBasic(), spriteMeta: "samus"}
+	testGround := BaseEntity{BasicEntity: ecs.NewBasic(), spriteMeta: "ground"}
 	testGround.SpaceComponent = common.SpaceComponent{
 		Position: engo.Point{0, 1000},
 		Width:    1024,
