@@ -60,8 +60,8 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 	}
 	sammy.Box2dComponent.Body.CreateFixtureFromDef(&sammyFixtureDef)
 	testGround := BaseEntity{BasicEntity: ecs.NewBasic(), spriteMeta: "samus"}
-	sammy.SpaceComponent = common.SpaceComponent{
-		Position: engo.Point{0, -100},
+	testGround.SpaceComponent = common.SpaceComponent{
+		Position: engo.Point{0, -1080},
 		Width:    1024,
 		Height:   576,
 	}
@@ -74,7 +74,6 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		Scale:    engo.Point{1, 1},
 	}
 	tgDef := box2d.NewB2BodyDef()
-	tgDef.Type = box2d.B2BodyType.B2_dynamicBody
 	tgDef.Position = engoBox2dSystem.Conv.ToBox2d2Vec(sammy.Center())
 	tgDef.Angle = engoBox2dSystem.Conv.DegToRad(sammy.Rotation)
 	testGround.Box2dComponent.Body = engoBox2dSystem.World.CreateBody(sammyDef)
