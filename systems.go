@@ -28,9 +28,9 @@ func (movementSystem *movementSystem) Update(dt float32) {
 		movementSystem.totalJump += 20
 		movementSystem.samus.isJumping = true
 	}
-	if movementSystem.samus.isJumping && movementSystem.totalJump <= 100 && movementSystem.totalJump >= -1 {
+	if movementSystem.samus.isJumping && movementSystem.samus.totalJump <= 100 && movementSystem.samus.totalJump >= -1 {
 		movementSystem.spaceComponent.Position.Y -= 20
-		movementSystem.totalJump += 20
+		movementSystem.samus.totalJump += 20
 	}
 }
 func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
