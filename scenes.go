@@ -73,19 +73,15 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		Drawable: tex,
 		Scale:    engo.Point{1, 1},
 	}
-	tgDef := box2d.NewB2BodyDef()
-	tgDef.Position = engoBox2dSystem.Conv.ToBox2d2Vec(sammy.Center())
-	tgDef.Angle = engoBox2dSystem.Conv.DegToRad(sammy.Rotation)
-	testGround.Box2dComponent.Body = engoBox2dSystem.World.CreateBody(sammyDef)
-	var tgShape box2d.B2PolygonShape
-
-	tgShape.SetAsBox(engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Width/2), engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Height/2))
-	tgFixtureDef := box2d.B2FixtureDef{
-		Shape:    &tgShape,
-		Density:  1.0,
-		Friction: 0.1,
-	}
-	testGround.Box2dComponent.Body.CreateFixtureFromDef(&tgFixtureDef)
+	grassBodyDef := box2d.NewB2BodyDef()
+	grassBodyDef.Position = engoBox2dSystem.Conv.ToBox2d2Vec(testGround.Center())
+	grassBodyDef.Angle = engoBox2dSystem.Conv.DegToRad(testGround.Rotation)
+	testGround.Box2dComponent.Body = engoBox2dSystem.World.CreateBody(grassBodyDef)
+	var grassBodyShape box2d.B2PolygonShape
+	grassBodyShape.SetAsBox(engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Width/2),
+		engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Height/2))
+	grassFixtureDef := box2d.B2FixtureDef{Shape: &grassBodyShape}
+	testGround.Box2dComponent.Body.CreateFixtureFromDef(&grassFixtureDef)
 
 	for _, system := range world.Systems() {
 		switch sys := system.(type) {
@@ -100,7 +96,6 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		case *engoBox2dSystem.CollisionSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
-			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		}
 	}
 	entityholder := entityHolder{}
