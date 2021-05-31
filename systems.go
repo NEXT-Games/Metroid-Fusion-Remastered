@@ -34,7 +34,7 @@ func (movementSystem *movementSystem) Update(dt float32) {
 		movementSystem.spaceComponent.Position.Y -= 20
 		movementSystem.totalJump += 20
 	}
-	if !movementSystem.samus.isJumping && movementSystem.totalJump >= 100 && movementSystem.totalJump <= -1 {
+	if !movementSystem.samus.isJumping && movementSystem.totalJump >= 100 {
 		log.Println("bruh")
 		movementSystem.totalJump = 0
 	}
