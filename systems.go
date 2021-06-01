@@ -11,7 +11,7 @@ import (
 
 type movementSystem struct {
 	spaceComponent *common.SpaceComponent
-	samus          *BaseEntity
+	samus          BaseEntity
 }
 
 func (*movementSystem) Type() string { return "movementSystem" }
@@ -25,19 +25,15 @@ func (movementSystem *movementSystem) Update(dt float32) {
 	if engo.Input.Button("MoveRight").Down() {
 		movementSystem.spaceComponent.Position.X += 3
 	}
-	if engo.Input.Button("Jump").Down() && (movementSystem.samus.canJump || movementSystem.samus.totalJump < 100) {
+	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump < 100 {
 		movementSystem.samus.Body.ApplyLinearImpulseToCenter(box2d.B2Vec2{X: 0, Y: -1000}, true)
 		movementSystem.samus.totalJump += 10
 	}
 	if engo.Input.Button("Jump").Down() && !movementSystem.samus.canJump {
 		log.Printf("%d", movementSystem.samus.totalJump)
 	}
-	if movementSystem.samus.totalJump > 100 && movementSystem.samus.canJump {
-		log.Println("*unjumps your samus*")
-		movementSystem.samus.canJump = false
-	}
 }
-func (movementSystem *movementSystem) AddEtc(samus *BaseEntity) {
+func (movementSystem *movementSystem) AddEtc(samus BaseEntity) {
 	movementSystem.samus = samus
 	movementSystem.samus.canJump = true
 }

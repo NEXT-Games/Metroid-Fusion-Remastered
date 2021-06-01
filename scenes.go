@@ -82,7 +82,9 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 		engoBox2dSystem.Conv.PxToMeters(testGround.SpaceComponent.Height/2))
 	grassFixtureDef := box2d.B2FixtureDef{Shape: &grassBodyShape}
 	testGround.Box2dComponent.Body.CreateFixtureFromDef(&grassFixtureDef)
-
+	entityholder := entityHolder{}
+	entityholder.Add(&entityType{sammy.BasicEntity, &sammy.Box2dComponent, sammy})
+	entityholder.Add(&entityType{testGround.BasicEntity, &testGround.Box2dComponent, testGround})
 	for _, system := range world.Systems() {
 		switch sys := system.(type) {
 		case *common.RenderSystem:
@@ -90,7 +92,8 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 			sys.Add(&testGround.BasicEntity, &testGround.RenderComponent, &testGround.SpaceComponent)
 		case *movementSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.RenderComponent, &sammy.SpaceComponent)
-			sys.AddEtc(&sammy)
+			sys.AddEtc(sammy)
+			entityholder.SetMsys(sys)
 		case *engoBox2dSystem.PhysicsSystem:
 			sys.Add(&sammy.BasicEntity, &sammy.SpaceComponent, &sammy.Box2dComponent)
 			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
@@ -99,9 +102,7 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 			sys.Add(&testGround.BasicEntity, &testGround.SpaceComponent, &testGround.Box2dComponent)
 		}
 	}
-	entityholder := entityHolder{}
-	entityholder.Add(&entityType{sammy.BasicEntity, &sammy.Box2dComponent, sammy})
-	entityholder.Add(&entityType{testGround.BasicEntity, &testGround.Box2dComponent, testGround})
+
 	addListeners(&entityholder)
 	log.Println("Designed with ❤️ by NEXT Games")
 	log.Println("If you have paid for this software you have been scammed")

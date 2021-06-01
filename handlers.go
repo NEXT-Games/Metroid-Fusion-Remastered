@@ -17,25 +17,17 @@ func addListeners(s *entityHolder) {
 			if c.Contact.IsTouching() {
 				for i1, e1 := range s.entities {
 					log.Printf("i1: %d", i1)
-					if e1.BasicEntity.ID() == a || e1.BasicEntity.ID() == b {
+					if e1.entity.BasicEntity.ID() == a || e1.entity.BasicEntity.ID() == b {
 						log.Println("e1 obtained")
 						for i2, e2 := range s.entities {
-							if i1 == i2 {
-								log.Println("i1 == i2")
-								continue
-							}
-							log.Printf("i2: %d", i1)
+							log.Printf("i2: %d", i2)
 							if e2.BasicEntity.ID() == a || e2.BasicEntity.ID() == b {
 								// This means samus has hit the floor and is no longer jumping.
 								// Stop the jump
 								log.Println("e1 and e2 obtained")
 								log.Println("jumpity jump")
-								e1.entity.canJump = true
-								e2.entity.canJump = true
-								e1.entity.totalJump = 0
-								e2.entity.totalJump = 0
-								e1.Debug()
-								e2.Debug()
+								s.msys.samus.canJump = true
+								s.msys.samus.totalJump = 0
 							}
 						}
 					}

@@ -25,12 +25,22 @@ type entityType struct {
 
 type entityHolder struct {
 	entities []*entityType
+	msys     *movementSystem
 }
 
 func (entity *entityType) Debug() {
 	log.Printf("debug entityType totaljump: %d", entity.entity.totalJump)
-
+	if entity.entity.canJump {
+		log.Println("debug entityType success canJump")
+	}
 }
 func (holder *entityHolder) Add(e *entityType) {
 	holder.entities = append(holder.entities, e)
+}
+func (holder *entityHolder) SetMsys(sys *movementSystem) {
+	holder.msys = sys
+}
+func (holder *entityType) SetCanJump() {
+	holder.entity.canJump = true
+	holder.entity.totalJump = 0
 }
