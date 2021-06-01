@@ -13,7 +13,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
       - name: Prep
-        run: mkdir mfr-ubuntu && cp -r tex mfr-ubuntu/tex
+        run: mkdir mfr-ubuntu && cp -r assets mfr-ubuntu/assets
       - name: Build
         run: go build -o mfr-ubuntu/Metroid-Fusion-Remastered     
       - uses: papeloto/action-zip@v1
