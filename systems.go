@@ -24,7 +24,7 @@ func (movementSystem *movementSystem) Update(dt float32) {
 	if engo.Input.Button("MoveRight").Down() {
 		movementSystem.spaceComponent.Position.X += 3
 	}
-	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump < 100 {
+	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump <= 100 {
 		movementSystem.spaceComponent.Position.Y -= 20
 		movementSystem.samus.totalJump += 20
 	}
