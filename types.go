@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo/common"
 	"github.com/Noofbiz/engoBox2dSystem"
@@ -25,6 +27,9 @@ type entityHolder struct {
 	entities []*entityType
 }
 
+func (entity *entityType) Debug() {
+	log.Printf("%d", entity.entity.totalJump)
+}
 func (holder *entityHolder) Add(e *entityType) {
 	holder.entities = append(holder.entities, e)
 }
