@@ -2,9 +2,7 @@ name: Generate release-artifacts
 
 # on events
 on:
-  release:
-    types: 
-        - created
+  push
 
 # workflow tasks
 jobs:
@@ -14,11 +12,18 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-      - name: Generate build files
-        uses: thatisuday/go-cross-build@v1
+      - name: Setup Go environment
+        uses: actions/setup-go@v2.1.3
+      - name: Prep
+        run: mkdir mfr-ubuntu && cp -r tex mfr-ubuntu/tex
+      - name: Build
+        run: go build -o mfr-ubuntu/Metroid-Fusion-Remastered     
+      - name: Post-prep
+      - uses: papeloto/action-zip@v1
         with:
-            platforms: 'linux/amd64, darwin/amd64, windows/amd64'
-            package: ''
-            name: 'fusion-remastered'
-            compress: 'true'
-            dest: 'dist'
+          files: mfr-ubuntu/
+          dest: mfr-ubuntu.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: METROID FUSION REMASTERED (Ubuntu)
+          path: mfr-ubuntu.zip
