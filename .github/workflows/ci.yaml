@@ -16,7 +16,6 @@ jobs:
         run: mkdir mfr-ubuntu && cp -r tex mfr-ubuntu/tex
       - name: Build
         run: go build -o mfr-ubuntu/Metroid-Fusion-Remastered     
-      - name: Post-prep
       - uses: papeloto/action-zip@v1
         with:
           files: mfr-ubuntu/
