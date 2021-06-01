@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 
-	"github.com/ByteArena/box2d"
 	"github.com/EngoEngine/ecs"
 	"github.com/EngoEngine/engo"
 	"github.com/EngoEngine/engo/common"
@@ -26,8 +25,8 @@ func (movementSystem *movementSystem) Update(dt float32) {
 		movementSystem.spaceComponent.Position.X += 3
 	}
 	if engo.Input.Button("Jump").Down() && movementSystem.samus.totalJump < 100 {
-		movementSystem.samus.Body.ApplyLinearImpulseToCenter(box2d.B2Vec2{X: 0, Y: -2000}, true)
-		movementSystem.samus.totalJump += 5
+		movementSystem.spaceComponent.Position.Y -= 20
+		movementSystem.samus.totalJump += 20
 	}
 	if engo.Input.Button("Jump").Down() && !movementSystem.samus.canJump {
 		log.Printf("%d", movementSystem.samus.totalJump)
