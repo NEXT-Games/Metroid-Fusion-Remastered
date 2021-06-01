@@ -28,7 +28,8 @@ type entityHolder struct {
 }
 
 func (entity *entityType) Debug() {
-	log.Printf("%d", entity.entity.totalJump)
+	log.Printf("debug entityType totaljump: %d", entity.entity.totalJump)
+
 }
 func (holder *entityHolder) Add(e *entityType) {
 	holder.entities = append(holder.entities, e)
