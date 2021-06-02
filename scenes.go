@@ -107,3 +107,5 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 	log.Println("Designed with ❤️ by NEXT Games")
 	log.Println("If you have paid for this software you have been scammed")
 }
+
+type MenuScene struct{}
