@@ -123,6 +123,7 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	world := u.(*ecs.World)
 	as := &common.AudioSystem{}
 	world.AddSystem(as)
+	world.AddSystem(menuSystem{})
 	menutheme := Music{BasicEntity: ecs.NewBasic()}
 	var err error
 	menutheme.AudioComponent.Player, err = common.LoadedPlayer("audio/theme_of_m4r.mp3")
@@ -132,7 +133,7 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	as.Add(&menutheme.BasicEntity, &menutheme.AudioComponent)
 	menutheme.Player.Play()
 	menutheme.Player.Repeat = true
-
+	engo.Input.RegisterButton("startgame", engo.KeyEnter)
 }
 
 func (scene *MenuScene) Type() string {

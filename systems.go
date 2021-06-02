@@ -43,3 +43,19 @@ func (movementSystem *movementSystem) Add(basicEntity *ecs.BasicEntity, renderCo
 func (movementSystem *movementSystem) Remove(added ecs.BasicEntity) {
 	// nop
 }
+
+type menuSystem struct{}
+
+func (*menuSystem) Type() string { return "menuSystem" }
+func (sys menuSystem) Update(dt float32) {
+	if engo.Input.Button("startgame").JustPressed() {
+		engo.SetScene(&MainDeckScene{}, true)
+	}
+}
+func (sys menuSystem) Add(e *ecs.BasicEntity) {
+	// nop
+}
+
+func (sys menuSystem) Remove(e ecs.BasicEntity) {
+	// nop
+}
