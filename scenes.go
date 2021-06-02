@@ -109,3 +109,32 @@ func (*MainDeckScene) Setup(u engo.Updater) {
 }
 
 type MenuScene struct{}
+
+type Music struct {
+	ecs.BasicEntity
+	common.AudioComponent
+}
+
+func (*MenuScene) Preload() {
+	engo.Files.Load("audio/theme_of_m4r.mp3")
+}
+
+func (scene *MenuScene) Setup(u engo.Updater) {
+	world := u.(*ecs.World)
+	as := &common.AudioSystem{}
+	world.AddSystem(as)
+	menutheme := Music{BasicEntity: ecs.NewBasic()}
+	var err error
+	menutheme.AudioComponent.Player, err = common.LoadedPlayer("audio/theme_of_m4r.mp3")
+	if err != nil {
+		log.Fatal(err)
+	}
+	as.Add(&menutheme.BasicEntity, &menutheme.AudioComponent)
+	menutheme.Player.Play()
+	menutheme.Player.Repeat = true
+
+}
+
+func (scene *MenuScene) Type() string {
+	return "MenuScene"
+}
