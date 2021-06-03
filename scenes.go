@@ -141,12 +141,19 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	menutheme.Player.Repeat = true
 	fnt := &common.Font{
 		URL:  "go.ttf",
-		FG:   color.Black,
+		FG:   color.White,
 		Size: 24,
 	}
+	fnt.CreatePreloaded()
 	text := Text{BasicEntity: ecs.NewBasic()}
 	text.RenderComponent.Drawable = common.Text{Font: fnt, Text: "Press Enter"}
-	fnt.CreatePreloaded()
+	text.SetShader(common.TextHUDShader)
+	text.RenderComponent.SetZIndex(1001)
+	text.SpaceComponent = common.SpaceComponent{
+		Position: engo.Point{X: 0, Y: 0},
+		Width:    1000,
+		Height:   1000,
+	}
 	for _, system := range world.Systems() {
 		switch sys := system.(type) {
 		case *common.RenderSystem:
