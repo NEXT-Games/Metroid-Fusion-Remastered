@@ -49,6 +49,7 @@ type menuSystem struct{}
 func (*menuSystem) Type() string { return "menuSystem" }
 func (sys menuSystem) Update(dt float32) {
 	if engo.Input.Button("startgame").JustPressed() {
+		engo.Mailbox.Dispatch(&DummyMessage{})
 		engo.SetScene(&MainDeckScene{}, true)
 	}
 }

@@ -28,6 +28,8 @@ type entityHolder struct {
 	msys     *movementSystem
 }
 
+type DummyMessage struct{}
+
 func (entity *entityType) Debug() {
 	log.Printf("debug entityType totaljump: %d", entity.entity.totalJump)
 	if entity.entity.canJump {
@@ -43,4 +45,8 @@ func (holder *entityHolder) SetMsys(sys *movementSystem) {
 func (holder *entityType) SetCanJump() {
 	holder.entity.canJump = true
 	holder.entity.totalJump = 0
+}
+
+func (*DummyMessage) Type() string {
+	return "menuswitch"
 }

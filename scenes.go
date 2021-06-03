@@ -21,6 +21,7 @@ func (*MainDeckScene) Preload() {
 func (*MainDeckScene) Setup(u engo.Updater) {
 	// Setup Scene
 	world, _ := u.(*ecs.World)
+	engo.Mailbox.Dispatch(&DummyMessage{})
 	engo.Input.RegisterButton("MoveLeft", engo.KeyA)
 	engo.Input.RegisterButton("MoveRight", engo.KeyD)
 	engo.Input.RegisterButton("Jump", engo.KeySpace)
@@ -124,6 +125,7 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	as := &common.AudioSystem{}
 	world.AddSystem(as)
 	world.AddSystem(menuSystem{})
+	world.AddSystem(&common.RenderSystem{})
 	menutheme := Music{BasicEntity: ecs.NewBasic()}
 	var err error
 	menutheme.AudioComponent.Player, err = common.LoadedPlayer("audio/theme_of_m4r.mp3")
@@ -134,6 +136,10 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	menutheme.Player.Play()
 	menutheme.Player.Repeat = true
 	engo.Input.RegisterButton("startgame", engo.KeyEnter)
+	engo.Mailbox.Listen("menuswitch", func(message engo.Message) {
+		log.Println("menuswitch")
+		menutheme.Player.Close()
+	})
 }
 
 func (scene *MenuScene) Type() string {
