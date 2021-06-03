@@ -30,6 +30,12 @@ type entityHolder struct {
 
 type DummyMessage struct{}
 
+type Text struct {
+	ecs.BasicEntity
+	common.SpaceComponent
+	common.RenderComponent
+}
+
 func (entity *entityType) Debug() {
 	log.Printf("debug entityType totaljump: %d", entity.entity.totalJump)
 	if entity.entity.canJump {

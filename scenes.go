@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"image/color"
 	"log"
 
 	"github.com/ByteArena/box2d"
@@ -8,6 +10,7 @@ import (
 	"github.com/EngoEngine/engo"
 	"github.com/EngoEngine/engo/common"
 	"github.com/Noofbiz/engoBox2dSystem"
+	"golang.org/x/image/font/gofont/gosmallcaps"
 )
 
 type MainDeckScene struct{}
@@ -118,6 +121,7 @@ type Music struct {
 
 func (*MenuScene) Preload() {
 	engo.Files.Load("audio/theme_of_m4r.mp3")
+	engo.Files.LoadReaderData("go.ttf", bytes.NewReader(gosmallcaps.TTF))
 }
 
 func (scene *MenuScene) Setup(u engo.Updater) {
@@ -135,6 +139,21 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	as.Add(&menutheme.BasicEntity, &menutheme.AudioComponent)
 	menutheme.Player.Play()
 	menutheme.Player.Repeat = true
+	fnt := &common.Font{
+		URL:  "go.ttf",
+		FG:   color.Black,
+		Size: 24,
+	}
+	text := Text{BasicEntity: ecs.NewBasic()}
+	text.RenderComponent.Drawable = common.Text{Font: fnt, Text: "Press Enter"}
+	fnt.CreatePreloaded()
+	for _, system := range world.Systems() {
+		switch sys := system.(type) {
+		case *common.RenderSystem:
+			sys.Add(&text.BasicEntity, &text.RenderComponent, &text.SpaceComponent)
+		}
+
+	}
 	engo.Input.RegisterButton("startgame", engo.KeyEnter)
 	engo.Mailbox.Listen("menuswitch", func(message engo.Message) {
 		log.Println("menuswitch")
