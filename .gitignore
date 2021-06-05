@@ -1,3 +1,5 @@
 *.exe
 Metroid-Fusion-Remastered
-assets
+assets/audio/*
+assets/tex/*
+assets/*
