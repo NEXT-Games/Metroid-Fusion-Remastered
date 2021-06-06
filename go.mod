@@ -1,4 +1,4 @@
-module github.com/NEXT-Games/Metroid-Fusion-Remastered
+module github.com/Warp-Studios/Metroid-Fusion-Remastered
 
 go 1.16
 
