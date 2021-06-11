@@ -64,7 +64,11 @@ func (movementSystem *movementSystem) Remove(added ecs.BasicEntity) {
 	// nop
 }
 
-type menuSystem struct{}
+type menuSystem struct {
+	selections      []string
+	cursel          int
+	totalSelections int
+}
 
 func (*menuSystem) Type() string { return "menuSystem" }
 func (sys menuSystem) Update(dt float32) {
@@ -73,10 +77,15 @@ func (sys menuSystem) Update(dt float32) {
 		engo.SetScene(&MainDeckScene{}, true)
 	}
 }
-func (sys menuSystem) Add(e *ecs.BasicEntity) {
-	// nop
+func (sys menuSystem) Add(menuItem string) {
+	sys.selections = append(sys.selections, menuItem)
+	sys.totalSelections++
 }
 
 func (sys menuSystem) Remove(e ecs.BasicEntity) {
 	// nop
+}
+
+func (sys menuSystem) Setup() {
+	sys.cursel = 0
 }

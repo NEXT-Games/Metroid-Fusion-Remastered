@@ -21,7 +21,7 @@ require (
 	github.com/vulkan-go/glfw v0.0.0-20210402172934-58379a80228d // indirect
 	github.com/vulkan-go/vulkan v0.0.0-20210402152248-956e3850d8f9 // indirect
 	golang.org/x/exp v0.0.0-20210602130115-9e70acc10e12 // indirect
-	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e // indirect
+	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e
 	golang.org/x/mobile v0.0.0-20210527171505-7e972142eb43 // indirect
 	golang.org/x/net v0.0.0-20210525063256-abc453219eb5 // indirect
 	golang.org/x/sys v0.0.0-20210601080250-7ecdf8ef093b // indirect
