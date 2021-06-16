@@ -53,6 +53,8 @@ type Text struct {
 	ecs.BasicEntity
 	common.SpaceComponent
 	common.RenderComponent
+	text string
+	font common.Font
 }
 
 func (entity *entityType) Debug() {
