@@ -88,4 +88,6 @@ func (sys menuSystem) Remove(e ecs.BasicEntity) {
 
 func (sys menuSystem) Setup() {
 	sys.cursel = 0
+	engo.Input.RegisterButton("menudown", engo.KeyArrowDown)
+	engo.Input.RegisterButton("menuup", engo.KeyArrowUp)
 }
