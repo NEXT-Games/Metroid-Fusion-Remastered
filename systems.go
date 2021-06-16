@@ -20,6 +20,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package main
 
 import (
+	"image/color"
 	"log"
 
 	"github.com/ByteArena/box2d"
@@ -73,6 +74,11 @@ type menuSystem struct {
 func (*menuSystem) Type() string { return "menuSystem" }
 func (sys menuSystem) Update(dt float32) {
 	if engo.Input.Button("menudown").JustPressed() {
+		sys.selections[sys.cursel].font.FG = color.White                            // Return color to white
+		sys.selections[sys.cursel-1].font.FG = color.RGBA{R: 0, B: 255, G: 0, A: 0} // Set color to blue
+		// Reconstruct drawables
+		sys.selections[sys.cursel].RenderComponent.Drawable = common.Text{Font: sys.selections[sys.cursel].font, Text: sys.selections[sys.cursel].text}
+		sys.selections[sys.cursel-1].RenderComponent.Drawable = common.Text{Font: sys.selections[sys.cursel-1].font, Text: sys.selections[sys.cursel-1].text}
 		if sys.cursel == 0 {
 			sys.cursel = sys.totalSelections // Scroll to the top if we are at the bottom
 		} else {
@@ -80,6 +86,11 @@ func (sys menuSystem) Update(dt float32) {
 		}
 	}
 	if engo.Input.Button("menuup").JustPressed() {
+		sys.selections[sys.cursel].font.FG = color.White                            // Return color to white
+		sys.selections[sys.cursel+1].font.FG = color.RGBA{R: 0, B: 255, G: 0, A: 0} // Set color to blue
+		// Reconstruct drawables
+		sys.selections[sys.cursel].RenderComponent.Drawable = common.Text{Font: sys.selections[sys.cursel].font, Text: sys.selections[sys.cursel].text}
+		sys.selections[sys.cursel+1].RenderComponent.Drawable = common.Text{Font: sys.selections[sys.cursel+1].font, Text: sys.selections[sys.cursel+1].text}
 		if sys.cursel == sys.totalSelections {
 			sys.cursel = 0 // Scroll to the bottom if we are at the top
 		} else {
