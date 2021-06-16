@@ -72,6 +72,13 @@ type menuSystem struct {
 
 func (*menuSystem) Type() string { return "menuSystem" }
 func (sys menuSystem) Update(dt float32) {
+	if engo.Input.Button("menudown").JustPressed() {
+		if sys.cursel == 0 {
+			sys.cursel = sys.totalSelections // Scroll to the top if we are at the bottom
+		} else {
+			sys.cursel--
+		}
+	}
 	if engo.Input.Button("startgame").JustPressed() {
 		engo.Mailbox.Dispatch(&DummyMessage{})
 		engo.SetScene(&MainDeckScene{}, true)
