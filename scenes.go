@@ -164,7 +164,7 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 		Size: 24,
 	}
 	fnt.CreatePreloaded()
-	text := Text{BasicEntity: ecs.NewBasic()}
+	text := Text{BasicEntity: ecs.NewBasic(), text: "Press Enter", font: fnt}
 	text.RenderComponent.Drawable = common.Text{Font: fnt, Text: "Press Enter"}
 	text.SetShader(common.TextHUDShader)
 	text.RenderComponent.SetZIndex(1001)

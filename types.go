@@ -54,7 +54,7 @@ type Text struct {
 	common.SpaceComponent
 	common.RenderComponent
 	text string
-	font common.Font
+	font *common.Font
 }
 
 func (entity *entityType) Debug() {
