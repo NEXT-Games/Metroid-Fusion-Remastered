@@ -65,7 +65,7 @@ func (movementSystem *movementSystem) Remove(added ecs.BasicEntity) {
 }
 
 type menuSystem struct {
-	selections      []string
+	selections      []Text
 	cursel          int
 	totalSelections int
 }
@@ -79,12 +79,20 @@ func (sys menuSystem) Update(dt float32) {
 			sys.cursel--
 		}
 	}
+	if engo.Input.Button("menuup").JustPressed() {
+		if sys.cursel == sys.totalSelections {
+			sys.cursel = 0 // Scroll to the bottom if we are at the top
+		} else {
+			sys.cursel++
+		}
+	}
+
 	if engo.Input.Button("startgame").JustPressed() {
 		engo.Mailbox.Dispatch(&DummyMessage{})
 		engo.SetScene(&MainDeckScene{}, true)
 	}
 }
-func (sys menuSystem) Add(menuItem string) {
+func (sys menuSystem) Add(menuItem Text) {
 	sys.selections = append(sys.selections, menuItem)
 	sys.totalSelections++
 }
