@@ -166,6 +166,8 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 	fnt.CreatePreloaded()
 	text := Text{BasicEntity: ecs.NewBasic(), text: "Press Enter", font: fnt}
 	text.RenderComponent.Drawable = common.Text{Font: fnt, Text: "Press Enter"}
+	bogus := Text{BasicEntity: ecs.NewBasic(), text: "sus imposter", font: fnt}
+	bogus.RenderComponent.Drawable = common.Text{Font: fnt, Text: "sus imposter"}
 	text.SetShader(common.TextHUDShader)
 	text.RenderComponent.SetZIndex(1001)
 	text.SpaceComponent = common.SpaceComponent{
@@ -173,12 +175,21 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 		Width:    1000,
 		Height:   1000,
 	}
+	bogus.SetShader(common.TextHUDShader)
+	bogus.RenderComponent.SetZIndex(1001)
+	bogus.SpaceComponent = common.SpaceComponent{
+		Position: engo.Point{X: 0, Y: 100},
+		Width:    1000,
+		Height:   1000,
+	}
 	for _, system := range world.Systems() {
 		switch sys := system.(type) {
 		case *common.RenderSystem:
 			sys.Add(&text.BasicEntity, &text.RenderComponent, &text.SpaceComponent)
+			sys.Add(&bogus.BasicEntity, &bogus.RenderComponent, &bogus.SpaceComponent)
 		case *menuSystem:
 			sys.Add(text)
+			sys.Add(bogus)
 		}
 
 	}
