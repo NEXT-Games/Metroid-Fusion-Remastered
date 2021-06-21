@@ -177,6 +177,8 @@ func (scene *MenuScene) Setup(u engo.Updater) {
 		switch sys := system.(type) {
 		case *common.RenderSystem:
 			sys.Add(&text.BasicEntity, &text.RenderComponent, &text.SpaceComponent)
+		case *menuSystem:
+			sys.Add(text)
 		}
 
 	}
