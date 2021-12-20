@@ -10,3 +10,4 @@ We're looking for:
 - More people to help with sprites
 - Voice Acting
 - And maybe some other things ;)
+
