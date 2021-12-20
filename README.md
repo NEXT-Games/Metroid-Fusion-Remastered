@@ -1,4 +1,6 @@
 # Metroid-Fusion-Remastered
+[![Chat on Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#!qwRQuUaJujQMBMFmXD:matrix.org)
+
 A remaster of Metroid Fusion by NEXT Games
 
 ## Looking for contributors!
